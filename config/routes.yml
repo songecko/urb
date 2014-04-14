@@ -1,0 +1,27 @@
+homepage:
+    path:     /
+    defaults: { _controller: 'Urb\Controller\MainController::indexAction' }
+
+like:
+    path:     /like
+    defaults: { _controller: 'Urb\Controller\MainController::likeAction' }
+  
+register:
+    path:     /register
+    defaults: { _controller: 'Urb\Controller\MainController::registerAction' }
+
+facebook_login:
+    path:     /facebook-login
+    defaults: { _controller: 'Urb\Controller\MainController::facebookLoginAction' }
+
+thanks:
+    path:     /thanks
+    defaults: { _controller: 'Urb\Controller\MainController::thanksAction' }
+
+register_list:
+    path:     /register-list
+    defaults: { _controller: 'Urb\Controller\MainController::registerListAction' }
+
+delete_register:
+    path:     /delete-register/{id}
+    defaults: { _controller: 'Urb\Controller\MainController::deleteRegisterAction' }

@@ -1,0 +1,9 @@
+parameters:
+    database_host: localhost
+    database_username: root
+    database_password: 123456
+    database_name: urb
+    facebook_app_id: '1452880464948036'
+    facebook_app_secret: '271f2d8d4b68b017b629cfbccad7aa51'
+    facebook_app_host: 'http://www.google.com.ar'
+    facebook_tab_url: 'http://www.google.com.ar'
