@@ -14,26 +14,10 @@ class MainController extends Controller
 {		
 	public function indexAction(Request $request)
 	{
-		$facebook = $this->container->get('facebook');
-		$signedRequest = $facebook->getSignedRequest();
+		$facebook = $this->container->get('facebook');		
 		$loginUrl = $facebook->getConfiguredLoginUrl();
 		
-		$mobileDetect = $this->container->get('mobile_detect');		
-		$isMobile = $mobileDetect->isMobile();
-		
-		if (!$isMobile && $signedRequest == null)
-		{
-			//return new RedirectResponse($facebook->getTabUrl());
-		}
-				
-		if($signedRequest && !$signedRequest['page']['liked'])
-		{
-			return new RedirectResponse('index.php/like');
-		}
-		
-		return $this->render('Main/index.php', array(				
-			'facebook' => $facebook,
-			'isMobile' => $isMobile,
+		return $this->render('Main/index.php', array(
 			'loginUrl' => $loginUrl
 		));
 	}
@@ -49,51 +33,28 @@ class MainController extends Controller
 		$register = $request->get('register');
 		if($register)
 		{
+			$facebook = $this->container->get('facebook');
+			$fbId = $facebook->getUser();
+			
 			$name = $register['name'];
-			$cedula = $register['cedula'];
+			$lastName = $register['last_name'];
+			$dni = $register['dni'];
 			$email = $register['email'];
-			$phone = $register['phone'];
-			$birthdate = $register['birthdate'];
-			$product = $register['product'];
-			$factura = $register['factura'];
-			$monto = $register['monto'];
-			$tienda = $register['tienda'];
+			$birthDate = $register['birth_date'];
+			$birthDate = $birthDate['year'].'-'.$birthDate['month'].'-'.$birthDate['day'];
 			$newsletter = (isset($register['newsletter']) && $register['newsletter']!='')?1:0;
-			$terms = $register['terms'];		
-	
-			$birthdate = $birthdate['year'].'-'.$birthdate['month'].'-'.$birthdate['day'];
+			$terms = $register['terms'];
 			
 			//Guardado en base de datos
 			$conn = $this->container->get('database')->getConnection();
-			$response['register_saved'] = $conn->insert('user', array(
-					'name' => $name, 'cedula' => $cedula, 'email' => $email, 'phone' => $phone,
-					'birthdate' => $birthdate, 'product' => $product, 'factura' => $factura, 'monto' => $monto,
-					'tienda' => $tienda, 'newsletter' => $newsletter
+			$result = $conn->insert('user', array(
+				'fbid' => $fbId, 'name' => $name, 'last_name' => $lastName, 'dni' => $dni, 
+				'email' => $email, 'birth_date' => $birthDate, 'newsletter' => $newsletter
 			));
 			
-			/** FACEBOOK **/
-			$facebook = $this->container->get('facebook');
-			if($facebook->getUser())
+			if($result == true)
 			{
-				try {
-					$ret_obj = $facebook->api('/me/feed', 'POST',
-							array(
-									'link' => $facebook->getAppHost(),
-									'name' => 'LG Premia con 10,000',
-									'message' => 'Estoy participando en la Promo LG premia con 10,000.',
-									'caption' => 'Estoy participando en la Promo LG premia con 10,000',
-									'picture' => $facebook->getAppHost().'/images/logo.png'
-							)
-					);
-					$response['fb_post'] = true;
-				} catch(FacebookApiException $e)
-				{
-					$response['fb_post'] = false;
-					$response['fb_post_error'] = array(
-							'type' => $e->getType(),
-							'message' => $e->getMessage()
-					);
-				}
+				return $this->redirect($this->generateUrl('startup'));
 			}
 		}
 		
@@ -104,7 +65,7 @@ class MainController extends Controller
 	public function thanksAction(Request $request)
 	{
 		return $this->render('Main/thanks.php');
-	}
+	}	
 	
 	public function facebookLoginAction(Request $request)
 	{
@@ -116,6 +77,11 @@ class MainController extends Controller
 		}
 		
 		return new RedirectResponse($this->container->get('routing.generator')->generate('homepage'));
+	}
+	
+	public function startupAction(Request $request)
+	{
+		return $this->render('Main/startup.php');
 	}
 	
 	public function registerListAction(Request $request)

@@ -41,10 +41,10 @@ $(document).ready(function()
 	$('.facebookButton').click(function()
 	{
 		facebookLogin();
-	});
+	});*/
 	
 	//Form	
-	$("section#form form").validate(
+	$("form#registerForm").validate(
 	{
 		onkeyup: false,
 		onclick: false,
@@ -62,8 +62,24 @@ $(document).ready(function()
 		},
 		invalidHandler: function(event, validator)
 		{
-			alert("Debes completar todos los campos obligatorios");
+			//alert("Debes completar todos los campos correctamente para continuar.");
 		},
+		showErrors: function(errorMap, errorList) 
+		{
+			if(errorList.length > 0)
+			{
+				var errorText = 'Debes resolver los siguienes errores para poder continuar:\n\n';
+				for (var i=0; i<errorList.length; i++) 
+				{
+					//errorText += "- "+errorList[i].message+"<br>";
+					errorText += "- "+errorList[i].message+"\n";
+				}
+				alert(errorText);
+				//$('#errorsModal .modal-body').html(errorText);
+				//$('#errorsModal').modal('show');
+			}
+			this.defaultShowErrors();
+		},/*
 		submitHandler: function(form)
 		{
 			if(!sending)
@@ -82,6 +98,6 @@ $(document).ready(function()
 	                }
 				});
 			}
-		}
-	});*/
+		}*/
+	});
 });

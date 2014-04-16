@@ -21,6 +21,7 @@ body{font-family: 'Roboto Condensed', Arial, sans-serif;}
 .tendencia{font-size: 3em; font-weight: 700; color: #fff; line-height: 20px; text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5);}
 
 .boton1{ display: block; width: 200px; height: 25px; padding: 0.75em; border-radius: 10px; cursor: pointer; box-shadow: 2px 2px 2px rgba(0,0,0,0.1); transition: all 0.3s ease-in-out; text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1); text-align: center; text-decoration: none; background: #e00109; font-size: 1.6em; color: #fff; line-height: 25px}
+button.boton1{ border: 0; padding: 0; height: 63px; }
 .boton1 span{ display: inline-block; vertical-align: top; }
 .boton1 i{ display: inline-block; vertical-align: top; font-size: 1.25em; margin: 10px 0 0 15px; line-height: 10px; }
 .hover{background: #880206; }

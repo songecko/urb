@@ -3,7 +3,8 @@ parameters:
     database_username: root
     database_password: 123456
     database_name: urb
-    facebook_app_id: '1452880464948036'
-    facebook_app_secret: '271f2d8d4b68b017b629cfbccad7aa51'
-    facebook_app_host: 'http://www.google.com.ar'
+    facebook_app_id: '738588072842792'
+    facebook_app_secret: '2b81995191260128c93214818cbf8050'
+    facebook_app_host: 'http://dev.urb.com/'
     facebook_tab_url: 'http://www.google.com.ar'
+    facebook_login_scope: 'basic_info, email, user_birthday, publish_actions'
