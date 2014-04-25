@@ -7,6 +7,9 @@ body{font-family: 'Roboto Condensed', Arial, sans-serif;}
 #contenedor.no-like, #contenedor.index {
 	background: url(../images/fondo.jpg) center top;
 }
+#contenedor.look {
+	background: url(../images/fondo3.jpg) center top;
+}
 #contenedor.register {
 	background: url(../images/fondo2.jpg) center top;
 }
@@ -26,7 +29,7 @@ button.boton1{ border: 0; padding: 0; height: 63px; }
 .boton1 i{ display: inline-block; vertical-align: top; font-size: 1.25em; margin: 10px 0 0 15px; line-height: 10px; }
 .hover{background: #880206; }
 
-h2{display: block; position: absolute; top: 70px; right: 20px; width: 30%; font-size: 2em; font-weight: 400; margin: 0; text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); z-index: 9900; height: auto; width: 90%; color: #fff; text-align: right}
+h2{display: block; position: absolute; top: 70px; right: 20px; width: 30%; font-size: 2em; font-weight: 400; margin: 0; text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); z-index: 900; height: auto; width: 90%; color: #fff; text-align: right}
 
 .texto_registro{display: block; float: right; width: 550px; height: auto; margin: 150px 0 0 15px; color: #666; font-size: 1em;}
 .registro{display: bock; width: 500px; float: right; text-align: right; list-style: none; color: #666; margin-right: 20px}
@@ -61,3 +64,20 @@ h3{font-size: 2em; margin-top:20px;}
 .tip{color: #e00109; font-weight: 700}
 
 .img_modelo{position: absolute; top: 160px; left: 30px}
+
+#CSPhotoSelector .CSPhotoSelector_dialog .CSPhotoSelector_header {
+	background: #e00109;
+}
+
+#CSPhotoSelector .CSPhotoSelector_dialog .CSPhotoSelector_form {
+	border: 1px solid #e00109;
+}
+
+#CSPhotoSelector a, #CSPhotoSelector a:active, #CSPhotoSelector a:hover, #CSPhotoSelector a:visited {
+	color: #666;
+}
+
+#CSPhotoSelector .CSPhotoSelector_dialog .CSPhotoSelector_footer #CSPhotoSelector_buttonOK {
+	background: #e00109;
+	border: 1px solid #e00109;
+}

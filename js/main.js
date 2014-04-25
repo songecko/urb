@@ -1,49 +1,120 @@
-function facebookLogin()
-{
-	FB.login(function(response)
-	{
-		if (response.authResponse) {
-			window.location = "http://ganoconlg.com/facebook-login";
-		}
-	}, {scope: 'basic_info, email, user_birthday, publish_actions'});
-};
-
 var sending = false;
 $(document).ready(function()
 {
-	$('.boton1').mouseenter(function() 
-	{
-		$(this).addClass('hover');
-	}).mouseleave(function() 
-	{
-		$(this).removeClass('hover');
-	});
-	
-	//Facebook
-	/*$.ajaxSetup({ cache: true });
+	/**-- Facebook --**/
+	$.ajaxSetup({ cache: true });
 	$.getScript('//connect.facebook.net/es_LA/all.js', function()
 	{
 		FB.init({
-			appId: '1452880464948036',
-	        status     : true,
-	        xfbml      : true
-	    });     
-		FB.Event.subscribe('auth.statusChange', function(response) 
-		{
-		    if (response.status === 'connected') {
-		      fillForm();
-		    } else {
-		      facebookLogin();
-		    }
-		});
+			appId:  '738588072842792',
+	        status: true,
+	        xfbml:  true
+	    });
 	});
-	  
-	$('.facebookButton').click(function()
-	{
-		facebookLogin();
-	});*/
 	
-	//Form	
+	
+	/**-- Facebook photo selector functions --**/
+	var selector, logActivity, callbackAlbumSelected, callbackPhotoUnselected, callbackSubmit;
+	var buttonOK = $('#CSPhotoSelector_buttonOK');
+	var o = this;
+	var addLookUrl;
+	
+	fbphotoSelect = function(id) 
+	{
+		// if no user/friend id is sent, default to current user
+		if (!id) id = 'me';
+		
+		callbackAlbumSelected = function(albumId) 
+		{
+			var album, name;
+			album = CSPhotoSelector.getAlbumById(albumId);
+			// show album photos
+			selector.showPhotoSelector(null, album.id);
+		};
+
+		callbackAlbumUnselected = function(albumId) 
+		{
+			var album, name;
+			album = CSPhotoSelector.getAlbumById(albumId);
+		};
+
+		callbackPhotoSelected = function(photoId) 
+		{
+			var photo;
+			photo = CSPhotoSelector.getPhotoById(photoId);
+			buttonOK.show();
+			console.log('Selected ID: ' + photo.id);
+		};
+
+		callbackPhotoUnselected = function(photoId) 
+		{
+			var photo;
+			album = CSPhotoSelector.getPhotoById(photoId);
+			buttonOK.hide();
+		};
+
+		callbackSubmit = function(photoId) {
+			var photo;
+			photo = CSPhotoSelector.getPhotoById(photoId);
+			console.log('Submitted Photo ID: ' + photo.id + 'Photo URL: ' + photo.source);
+			
+			$.ajax({
+                type: "POST",
+                url: addLookUrl,
+                data: { photoId: photo.id, photoSource: photo.source },
+                success: function(data, textStatus, jqXHR)
+                {
+                	var lookUrl = data.lookUrl;
+                	self.location = lookUrl;
+                }
+			});
+		};
+
+
+		// Initialise the Photo Selector with options that will apply to all instances
+		CSPhotoSelector.init({debug: true});
+
+		// Create Photo Selector instances
+		selector = CSPhotoSelector.newInstance({
+			callbackAlbumSelected	: callbackAlbumSelected,
+			callbackAlbumUnselected	: callbackAlbumUnselected,
+			callbackPhotoSelected	: callbackPhotoSelected,
+			callbackPhotoUnselected	: callbackPhotoUnselected,
+			callbackSubmit			: callbackSubmit,
+			maxSelection			: 1,
+			albumsPerPage			: 6,
+			photosPerPage			: 200,
+			autoDeselection			: true
+		});
+
+		// reset and show album selector
+		selector.reset();
+		selector.showAlbumSelector(id);
+	};
+	
+	$(".photoSelect").click(function (e) 
+	{
+		e.preventDefault();
+		id = null;
+		if ( $(this).attr('data-id') ) id = $(this).attr('data-id');
+		addLookUrl = $(this).data('addLookUrl');
+		fbphotoSelect(id);
+	});
+	
+	$(".fbShare").click(function (e) 
+	{
+		e.preventDefault();
+		FB.ui({
+			method: 'feed',
+			link: ''+self.location,
+			name: 'Recomendador de Looks de URB',
+			caption: 'Acabo de utilizar el Recomendador de Looks de URB. Ingresa para ver cual es el tuyo.',
+			description: ' ',
+		}, function(response){});
+	});
+	
+	
+	/**-- Register Form --**/
 	$("form#registerForm").validate(
 	{
 		onkeyup: false,
@@ -82,22 +153,17 @@ $(document).ready(function()
 		},/*
 		submitHandler: function(form)
 		{
-			if(!sending)
-			{				
-				sending = true;
-				
-				$.ajax({
-	                type: "POST",
-	                url: 'http://ganoconlg.com/register',
-	                data: $(form).serialize(),
-	                success: function(data, textStatus, jqXHR)
-	                {
-	                	$(form).trigger("reset");
-	                	window.location = "http://ganoconlg.com/thanks";
-	                	sending = false;
-	                }
-				});
-			}
 		}*/
+	});
+	
+	
+	/**-- Misc --**/
+	
+	$('.boton1').mouseenter(function() 
+	{
+		$(this).addClass('hover');
+	}).mouseleave(function() 
+	{
+		$(this).removeClass('hover');
 	});
 });

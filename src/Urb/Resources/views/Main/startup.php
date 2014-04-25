@@ -16,9 +16,10 @@
 				<p style="float: left; margin-top: 12px">¡Descubre tu color ideal!</p>
 			</li>
 			<li>
-				<a href="#" class="boton1" style="margin: 20px 0 0 90px"><span>Elegir fotos</span> <i class="fa fa-picture-o"></i></a>
+				<a href="#" class="boton1 photoSelect" data-add-look-url="<?php echo $container->get('routing.generator')->generate('add_look') ?>" style="margin: 20px 0 0 90px"><span>Elegir fotos</span> <i class="fa fa-picture-o"></i></a>
 			</li>
 		</ul>
 	</div>
-	<img class="logo_jumbo" src="<?php echo $view['assets']->getUrl('images/jumbo.png')?>" width="120" style="padding: 15px" />
+	<img class="logo_jumbo" src="<?php echo $view['assets']->getUrl('images/jumbo.png') ?>" width="120" style="padding: 15px" />
+	
 </div>

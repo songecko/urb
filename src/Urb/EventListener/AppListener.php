@@ -48,14 +48,17 @@ class AppListener implements EventSubscriberInterface
     		$user = $conn->fetchArray('SELECT * FROM user WHERE fbid = ?', array($fbId));
     		
     		//If user is registered
-    		if($user)
-    		{
-    			$this->redirectToRoute($event, 'startup');
-    			return;
-    		}else 
+    		if(!$user)
     		{
     			$this->redirectToRoute($event, 'register');
     			return;
+    		}else 
+    		{
+    			if($this->isOnRoute('homepage') || $this->isOnRoute('register'))
+    			{
+    				$this->redirectToRoute($event, 'startup');
+    				return;
+    			}
     		}
     	}else
     	{

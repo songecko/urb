@@ -24,6 +24,8 @@ class DatabaseCreateTablesCommand extends Command
     	$platform = $conn->getDatabasePlatform();
     	
     	$schema = new \Doctrine\DBAL\Schema\Schema();
+    	
+    	//user table
     	$userTable = $schema->createTable("user");
     	$userTable->addColumn("id", "integer", array("unsigned" => true, "autoincrement" => true));
     	$userTable->addColumn("fbid", "string", array("length" => 255));
@@ -35,6 +37,15 @@ class DatabaseCreateTablesCommand extends Command
     	$userTable->addColumn("newsletter", "boolean");
     	$userTable->setPrimaryKey(array("id"));
     	$userTable->addUniqueIndex(array("email"));
+    	
+    	//user_look table
+    	$userLookTable = $schema->createTable("user_look");
+    	$userLookTable->addColumn("id", "integer", array("unsigned" => true, "autoincrement" => true));
+    	$userLookTable->addColumn("user_id", "integer", array("unsigned" => true));
+    	$userLookTable->addColumn("image", "string", array("length" => 255));
+    	$userLookTable->addColumn("color", "string", array("length" => 255, 'notnull' => false));
+    	$userLookTable->setPrimaryKey(array("id"));
+    	$userLookTable->addForeignKeyConstraint($userTable, array("user_id"), array("id"), array("onDelete" => "CASCADE"));
     	
     	$queries = $schema->toSql($platform); // get queries to create this schema.
     	foreach ($queries as $query)
