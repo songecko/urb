@@ -30,7 +30,9 @@ class AppListener implements EventSubscriberInterface
     	$signedRequest = $facebook->getSignedRequest();
     	
     	//If is on desktop but not on facebook tab
-    	if (!$mobileDetect->isMobile() && (!isset($_SERVER['HTTP_REFERER']) || $this->request->get('code')))
+    	if (!$mobileDetect->isMobile() 
+			&& (!isset($_SERVER['HTTP_REFERER']) || (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] == null)
+			|| $this->request->get('code')))
     	{
     		$event->setResponse($this->redirect($facebook->getTabUrl()));
 			return;
