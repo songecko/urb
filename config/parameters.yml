@@ -6,5 +6,5 @@ parameters:
     facebook_app_id: '738588072842792'
     facebook_app_secret: '2b81995191260128c93214818cbf8050'
     facebook_app_host: 'http://dev.urb.com/'
-    facebook_tab_url: 'http://www.google.com.ar'
+    facebook_tab_url: 'https://www.facebook.com/pages/App-Testing/694074063968391?id=694074063968391&sk=app_738588072842792'
     facebook_login_scope: 'basic_info, email, user_birthday, publish_actions, user_photos'

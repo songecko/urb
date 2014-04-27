@@ -10,6 +10,7 @@ $(document).ready(function()
 	        status: true,
 	        xfbml:  true
 	    });
+		FB.Canvas.setSize({ width: 810, height: 850 });
 	});
 	
 	

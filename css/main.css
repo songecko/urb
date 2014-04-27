@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /* CSS Document */
 
-body{font-family: 'Roboto Condensed', Arial, sans-serif;}
+body{font-family: 'Roboto Condensed', Arial, sans-serif;overflow: hidden;}
 
 #contenedor{ position: relative; width: 810px; height: 850px; margin: 0 auto;}
 #contenedor.no-like, #contenedor.index {

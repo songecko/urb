@@ -12,10 +12,11 @@ use Symfony\Component\HttpFoundation\Request;
 class AppListener implements EventSubscriberInterface
 {
     private $container;
+    private $request;
 
     public function __construct(ContainerBuilder $container)
     {
-        $this->container = $container;    
+        $this->container = $container;
     }
 
     public function onKernelRequest(GetResponseEvent $event)
@@ -29,18 +30,23 @@ class AppListener implements EventSubscriberInterface
     	$signedRequest = $facebook->getSignedRequest();
     	
     	//If is on desktop but not on facebook tab
-    	if (!$mobileDetect->isMobile() && $signedRequest == null)
+    	if (!$mobileDetect->isMobile() && (!isset($_SERVER['HTTP_REFERER']) || $this->request->get('code')))
     	{
-    		//$event->setResponse($this->redirect($facebook->getTabUrl()));
+    		$event->setResponse($this->redirect($facebook->getTabUrl()));
+			return;
     	}
     	
+    	//If on liked
+		if($this->isOnRoute('like'))
+			return;
+		
     	//If not page liked
-    	if($signedRequest && !$signedRequest['page']['liked'] && !$this->isOnRoute($request, 'like'))
+    	if($signedRequest && !$signedRequest['page']['liked'])
     	{
     		$this->redirectToRoute($event, 'like');
     		return;
-    	}
-    	
+    	}    
+		
     	//If logged in on facebook
     	if($fbId = $facebook->getUser())
     	{
