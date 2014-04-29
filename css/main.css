@@ -3,6 +3,7 @@
 
 body{font-family: 'Roboto Condensed', Arial, sans-serif;overflow: hidden;}
 
+.hide { display: none; }
 #contenedor{ position: relative; width: 810px; height: 850px; margin: 0 auto;}
 #contenedor.no-like, #contenedor.index {
 	background: url(../images/fondo.jpg) center top;
@@ -29,7 +30,7 @@ button.boton1{ border: 0; padding: 0; height: 63px; }
 .boton1 i{ display: inline-block; vertical-align: top; font-size: 1.25em; margin: 10px 0 0 15px; line-height: 10px; }
 .hover{background: #880206; }
 
-h2{display: block; position: absolute; top: 70px; right: 20px; width: 30%; font-size: 2em; font-weight: 400; margin: 0; text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); z-index: 900; height: auto; width: 90%; color: #fff; text-align: right}
+h2{display: block; position: absolute; top: 70px; right: 20px; width: 30%; font-size: 2em; font-weight: 400; margin: 0; text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); z-index: 900; height: auto; width: 90%; color: #fff; text-align: left}
 
 .texto_registro{display: block; float: right; width: 550px; height: auto; margin: 150px 0 0 15px; color: #666; font-size: 1em;}
 .registro{display: bock; width: 500px; float: right; text-align: right; list-style: none; color: #666; margin-right: 20px}
@@ -64,6 +65,77 @@ h3{font-size: 2em; margin-top:20px;}
 .tip{color: #e00109; font-weight: 700}
 
 .img_modelo{position: absolute; top: 160px; left: 30px}
+
+.modal {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 8000;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: #fff;
+	background: rgba(255,255,255,.75);
+}
+.modal .modal-content {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -250px;
+	margin-top: -100px;
+	width: 450px;
+	height: 150px;
+	padding: 25px;
+	background: #d5d4d4;
+	border: 1px solid #d42430;
+	text-align: center;
+}
+.modal .modal-content .modal-close {
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	font-weight: bold;
+	color: #fff;
+}
+.modal .modal-content .vertical-center {
+	height: 150px;
+}
+
+.register-msj p {
+	font-size: 24px;
+	font-weight: bold;
+	font-style: italic;
+	line-height: 1.4;
+	color: #615e5e;
+}
+.register-msj strong {
+	text-transform: uppercase;
+}
+.register-msj .button {
+	position: absolute;
+	bottom: -20px;
+	left: 50%;
+	margin-left: -75px;
+	width: 150px;
+	font-size: 24px;
+	font-weight: bold;
+	font-style: italic;
+}
+
+.vertical-center {
+	width: 100%;
+	display: table;
+}
+.vertical-center > * {
+	display: table-cell;
+	vertical-align: middle;
+}
+
 
 #CSPhotoSelector .CSPhotoSelector_dialog .CSPhotoSelector_header {
 	background: #e00109;

@@ -1,7 +1,7 @@
 <div id="contenedor" class="register">
-	<img src="<?php echo $view['assets']->getUrl('images/urb.png')?>" width="150" style="padding: 15px" />
+	<img src="<?php echo $view['assets']->getUrl('images/urb.png')?>" width="150" style="padding: 15px; position:absolute; margin-left:620px;" />
 	<h2>¡Registrate y participá!</h2>
-	<p class="texto_registro">Llega el frío y es hora de renovar tu look pero, ¿sabés cuál es tu color ideal para esta temporada? ¡Nosotros te ayudamos! Elige tu foto y te mostraremos cual es el tono ideal para vos. Registrate para empezar. </p>
+	<p class="texto_registro"><br>Llega el frío y es hora de renovar tu look pero, ¿sabés cuál es tu color ideal para esta temporada? ¡Nosotros te ayudamos! Elige tu foto y te mostraremos cual es el tono ideal para vos. Registrate para empezar. </p>
 	<form action="<?php echo $container->get('routing.generator')->generate('register') ?>" method="post" id="registerForm">
 		<ul class="registro">
 			<li>
@@ -48,13 +48,13 @@
 					data-rule-required="true" 
 				/>
 			</li>
-			<li style="text-align: left; padding-left: 210px">
+			<!--<li style="text-align: left; padding-left: 210px">
 				<input style="width: auto;" name="register[terms]" type="checkbox"
 					title="Debes aceptar las bases y condiciones."
 					data-rule-required="true" 
 				/> 
 				Acepto bases y condiciones
-			</li>
+			</li>-->
 			<li style="text-align: left; padding-left: 210px">
 				<input style="width: auto;" type="checkbox" name="register[newsletter]" /> Quiero recibir información sobre Jumbo.
 			</li>

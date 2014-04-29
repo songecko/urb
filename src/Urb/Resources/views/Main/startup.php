@@ -1,5 +1,5 @@
 <div id="contenedor" class="register">
-	<img src="<?php echo $view['assets']->getUrl('images/urb.png')?>" width="150" style="padding: 15px" />
+	<img src="<?php echo $view['assets']->getUrl('images/urb.png')?>" width="150" style="padding: 15px; position:absolute; margin-left:620px;" />
 	<h2>¡Registrate y participá!</h2>
 	<div class="mecanica">
 		<ul>

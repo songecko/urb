@@ -59,6 +59,7 @@ $(document).ready(function()
 			photo = CSPhotoSelector.getPhotoById(photoId);
 			console.log('Submitted Photo ID: ' + photo.id + 'Photo URL: ' + photo.source);
 			
+			$('.modal').fadeIn();
 			$.ajax({
                 type: "POST",
                 url: addLookUrl,

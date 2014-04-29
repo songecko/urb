@@ -1,5 +1,5 @@
 <div id="contenedor" class="look">
-	<img src="<?php echo $view['assets']->getUrl('images/urb.png')?>" width="150" style="padding: 15px" />
+	<img src="<?php echo $view['assets']->getUrl('images/urb.png')?>" width="150" style="padding: 15px; position:absolute; margin-left:620px;" />
 	<h2>Look recomendado</h2>
 	<img class="img_modelo" src="<?php echo $view['assets']->getUrl('images/'.$userLook['image'])?>" />
 	<div class="resultado">
